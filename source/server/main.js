@@ -7,6 +7,8 @@ import { WebSocketServer } from "ws";
 // Create our HTTP server
 let server = createServer();
 
+let port = process.env.PORT ?? 3000;
+
 // Set up websocket server
 let wsServer = new WebSocketServer({ server });
 
@@ -21,4 +23,4 @@ wsServer.addListener("connection", (socket, req) => {
 });
 
 // Start the server listening for requests
-server.listen(3000);
+server.listen(port);
