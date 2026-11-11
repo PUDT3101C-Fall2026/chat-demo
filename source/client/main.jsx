@@ -13,6 +13,8 @@ function App() {
 
   let [messages, setMessages] = useState([]);
 
+  let [myId, setMyId] = useState();
+
   useEffect(() => {
     let newSocket = new WebSocket("ws://149.31.228.157:3000/");
 
@@ -26,10 +28,9 @@ function App() {
     newSocket.addEventListener("message", (event) => {
       let data = JSON.parse(event.data);
 
-      console.log(data);
-      // TODO: Implement messages...
-
-      if (data.type == "message") {
+      if (data.type == "hello") {
+        setMyId(data.userId);
+      } else if (data.type == "message") {
         setMessages((oldMessages) => [...oldMessages, data]);
       }
     });
@@ -52,7 +53,10 @@ function App() {
     <div className="chat-window">
       <ul id="chat">
         {messages.map((m) => (
-          <li>{m.message}</li>
+          <li>
+            {m.userId == myId ? "Me: " : "Them: "}
+            {m.message}
+          </li>
         ))}
       </ul>
       <div className="chat-ui">
