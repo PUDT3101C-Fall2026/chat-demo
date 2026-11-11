@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "server": "node source/server/main.js",
+    "start": "node source/server/main.js",
     "client": "vite serve source/client"
   },
   "devDependencies": {

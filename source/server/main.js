@@ -12,9 +12,11 @@ let wsServer = new WebSocketServer({ server });
 
 wsServer.addListener("connection", (socket, req) => {
   // Received connection
+  console.log("Received connection from " + req.socket.remoteAddress);
 
   socket.addListener("message", (data) => {
-    history.push(data.toString());
+    console.log("Received message...");
+    console.log(data.toString());
   });
 });
 
